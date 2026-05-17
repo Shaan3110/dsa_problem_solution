@@ -21,6 +21,8 @@ You may assume the two numbers do not contain any leading zero, except the numbe
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+
+
 class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 
@@ -34,7 +36,6 @@ class Solution {
             int x = (l1 != null) ? l1.val : 0;
             int y = (l2 != null) ? l2.val : 0;
 
-            // we hadd all the values of 1st node and 2nd node and carry together and then determine if there is a carry so it's a better approach of handling this
             int sum = x + y + carry;
 
             carry = sum / 10;
@@ -48,19 +49,17 @@ class Solution {
             }
             else
             {
-                // l1 finished, attach remaining nodes from l2
-                prev.next = l2;
-                l2.val = digit;
-                prev = l2;
-                l2 = l2.next;
+                prev.next = new ListNode(digit);
+                prev = prev.next;
             }
-            // we have to increment l2 in the logic, but adding a check before incrementing helps prevent incrementing l2 by 2 positions as we do increment it on else statement
-            if(l2 != null && prev != l2)
+
+            if(l2 != null)
             {
                 l2 = l2.next;
             }
         }
 
+        // if carry is left just put it on next node 
         if(carry > 0)
         {
             prev.next = new ListNode(carry);
@@ -71,3 +70,5 @@ class Solution {
 }
 
 ```
+
+
