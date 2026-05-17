@@ -227,3 +227,42 @@ class Solution {
     }
 }
 ```
+
+### Merge Two Sorted Linked Lists
+
+<img width="662" height="302" alt="image" src="https://github.com/user-attachments/assets/cb7894fa-fe40-4cf8-affc-4a26f0eb5300" />
+
+
+```
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+
+        ListNode dummy = new ListNode(-1);
+        ListNode current = dummy;
+
+        while(list1 != null && list2 != null)
+        {
+            if(list1.val < list2.val)
+            {
+                current.next = list1;
+                list1 = list1.next;
+            }
+            else
+            {
+                current.next = list2;
+                list2 = list2.next;
+            }
+
+            current = current.next;
+        }
+
+        if(list1 != null)
+            current.next = list1;
+
+        if(list2 != null)
+            current.next = list2;
+
+        return dummy.next;
+    }
+}
+```
