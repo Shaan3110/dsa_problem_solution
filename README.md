@@ -232,6 +232,7 @@ class Solution {
 
 <img width="662" height="302" alt="image" src="https://github.com/user-attachments/assets/cb7894fa-fe40-4cf8-affc-4a26f0eb5300" />
 
+**Solution** -
 
 ```
 class Solution {
@@ -263,6 +264,83 @@ class Solution {
             current.next = list2;
 
         return dummy.next;
+    }
+}
+```
+
+### Reverse a Linked List
+
+**Solution** - Just maintain 3 nodes at a time prev, current and next. current -> next = prev and current = next
+
+```
+class Solution {
+    public ListNode reverseList(ListNode head) {
+
+        ListNode prev = null;
+        ListNode current = head;
+
+        while(current != null)
+        {
+            ListNode next = current.next;
+
+            current.next = prev;
+
+            prev = current;
+            current = next;
+        }
+
+        return prev;
+    }
+}
+```
+
+### BFS Level Traversal Tree ( Binary Tree )
+
+Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
+
+<img width="277" height="302" alt="image" src="https://github.com/user-attachments/assets/6d9f8c13-8497-449d-8879-4aa17177048e" />
+
+Input: root = [3,9,20,null,null,15,7]
+Output: [[3],[9,20],[15,7]]
+
+**Solution** - Simple approach to traverse a binary tree from top to bottom based on level we need to maintain two data structures one is a queue ( FIFO ) and another is a array list to main that level elements. 
+
+```
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+
+        List<List<Integer>> result = new ArrayList<>();
+
+        if(root == null)
+            return result;
+
+        Queue<TreeNode> queue = new LinkedList<>();
+
+        queue.offer(root);
+
+        while(!queue.isEmpty())
+        {
+            int size = queue.size();
+
+            List<Integer> level = new ArrayList<>();
+
+            for(int i=0;i<size;i++)
+            {
+                TreeNode node = queue.poll();
+
+                level.add(node.val);
+
+                if(node.left != null)
+                    queue.offer(node.left);
+
+                if(node.right != null)
+                    queue.offer(node.right);
+            }
+
+            result.add(level);
+        }
+
+        return result;
     }
 }
 ```
