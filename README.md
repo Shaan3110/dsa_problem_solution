@@ -396,3 +396,73 @@ class Solution {
     }
 }
 ```
+
+### Move Zeroes at end of Array
+
+**Solution** - Simply traverse through the array and on the loop find all the non-zero elements and append it on the zero indexes. And once done just paste remaining size of the array with 0.
+
+```
+class Solution {
+    public void moveZeroes(int[] nums) {
+
+        int index = 0;
+
+        for(int i=0;i<nums.length;i++)
+        {
+            if(nums[i] != 0)
+            {
+                nums[index++] = nums[i];
+            }
+        }
+
+        while(index < nums.length)
+        {
+            nums[index++] = 0;
+        }
+    }
+}
+```
+
+### Anagram String 
+
+Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+
+ 
+Example 1:
+
+Input: s = "anagram", t = "nagaram"
+
+Output: true
+
+Example 2:
+
+Input: s = "rat", t = "car"
+
+Output: false
+
+**Solution** - Two Strings are anagram if the characters of the both arrays are same just they are rearranged.
+
+```
+class Solution {
+    public boolean isAnagram(String s, String t) {
+
+        if(s.length() != t.length())
+            return false;
+
+        int[] count = new int[26];
+
+        for(char c : s.toCharArray())
+            count[c-'a']++;
+
+        for(char c : t.toCharArray())
+        {
+            count[c-'a']--;
+
+            if(count[c-'a'] < 0)
+                return false;
+        }
+
+        return true;
+    }
+}
+```
