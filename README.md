@@ -466,3 +466,101 @@ class Solution {
     }
 }
 ```
+
+### Minimum Length of Anagram Concatenation
+
+You are given a string s, which is known to be a concatenation of anagrams of some string t.
+
+Return the minimum possible length of the string t.
+
+An anagram is formed by rearranging the letters of a string. For example, "aab", "aba", and, "baa" are anagrams of "aab".
+
+ 
+
+Example 1:
+
+Input: s = "abba"
+
+Output: 2
+
+Explanation:
+
+One possible string t could be "ba".
+
+Example 2:
+
+Input: s = "cdef"
+
+Output: 4
+
+Explanation:
+
+One possible string t could be "cdef", notice that t can be equal to s.
+
+Example 2:
+
+Input: s = "abcbcacabbaccba"
+
+Output: 3
+
+Link: https://leetcode.com/problems/minimum-length-of-anagram-concatenation/solutions/5113882/100-correct-solution-without-gcd-by-adit-9q6h/
+
+GCD will not work if the string is abba then it can be 2 as there are two unique characters. But for aabbbaab then it can't be 2 as aa will be t and it can't be a anagram of ab. So it should be 4 aabb and abba are really anagram.
+
+
+```
+class Solution {
+    bool ok(string s, int k) {
+        int n = s.length();
+        int cnt[26] = {0};
+        for (int i = 0; i < k; i++)
+            cnt[s[i] - 'a']++;
+        for (int i = k; i < n; i += k) {
+            int cnt2[26] = {0};
+            for (int j = i; j < i + k; j++)
+                cnt2[s[j] - 'a']++;
+            for (int j = 0; j < 26; j++)
+                if (cnt[j] != cnt2[j])
+                    return false;
+        }
+        return true;
+    }
+
+public:
+    int minAnagramLength(string s) {
+        int n = s.size();
+        for (int i = 1; i <= n; i++)
+            if (n % i == 0 && ok(s, i))
+                return i;
+        return n;
+    }
+};
+
+```
+
+### Longest Substring Without Repeating Characters
+
+**Solution** - Simply maintain a hash set so no duplicates are present now let's say you get a element duplicate. Maintain two indices which is left and right , now on right keep adding elements till a duplicate appeared and as soon a duplicate came, keep incrementing the left till the duplicate is not present . In this way keep a count of max, and the difference of right -left is the size of max.
+
+```
+public static boolean isAnagram(String s, String t) {
+
+        if(s.length() != t.length())
+            return false;
+
+        int[] count = new int[26];
+
+        for(char c : s.toCharArray())
+            count[c-'a']++;
+
+        for(char c : t.toCharArray())
+        {
+            count[c-'a']--;
+
+            if(count[c-'a'] < 0)
+                return false;
+        }
+
+        return true;
+    }
+```
