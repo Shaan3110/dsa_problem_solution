@@ -344,3 +344,55 @@ class Solution {
     }
 }
 ```
+
+### Traverals in Trees
+
+```
+class Solution {
+
+    public List<Integer> inorderTraversal(TreeNode root) {
+
+        List<Integer> result = new ArrayList<>();
+
+        inorder(root, result);
+
+        return result;
+    }
+
+     public void preorder(TreeNode node, List<Integer> result) {
+
+        if(node == null)
+            return;
+
+        result.add(node.val);
+
+        preorder(node.left, result);
+
+        preorder(node.right, result);
+    }
+
+    public void inorder(TreeNode node, List<Integer> result) {
+
+        if(node == null)
+            return;
+
+        inorder(node.left, result);
+
+        result.add(node.val);
+
+        inorder(node.right, result);
+    }
+
+    public void postorder(TreeNode node, List<Integer> result) {
+
+        if(node == null)
+            return;
+
+        postorder(node.left, result);
+
+        postorder(node.right, result);
+
+        result.add(node.val);
+    }
+}
+```
