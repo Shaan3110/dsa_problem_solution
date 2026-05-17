@@ -70,7 +70,7 @@ class Solution {
 }
 
 ```
-**Two Sum**
+### Two Sum
 
 Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
 
@@ -109,7 +109,7 @@ class Solution {
 }
 ```
 
-**Maximum Subarray ( Kadane’s Algorithm )**
+### Maximum Subarray ( Kadane’s Algorithm )
 
 Given an integer array nums, find the subarray with the largest sum, and return its sum.
 
@@ -148,7 +148,7 @@ class Solution {
 }
 ```
 
-**Best Time to Buy and Sell Stock**
+### Best Time to Buy and Sell Stock
 
 You are given an array prices where prices[i] is the price of a given stock on the ith day.
 
@@ -191,7 +191,7 @@ class Solution {
 }
 ```
 
-**Valid Parentheses**
+### Valid Parentheses
 
 Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
 
