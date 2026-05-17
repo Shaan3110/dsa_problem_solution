@@ -34,6 +34,7 @@ class Solution {
             int x = (l1 != null) ? l1.val : 0;
             int y = (l2 != null) ? l2.val : 0;
 
+            // we hadd all the values of 1st node and 2nd node and carry together and then determine if there is a carry so it's a better approach of handling this
             int sum = x + y + carry;
 
             carry = sum / 10;
@@ -53,7 +54,7 @@ class Solution {
                 prev = l2;
                 l2 = l2.next;
             }
-
+            // we have to increment l2 in the logic, but adding a check before incrementing helps prevent incrementing l2 by 2 positions as we do increment it on else statement
             if(l2 != null && prev != l2)
             {
                 l2 = l2.next;
