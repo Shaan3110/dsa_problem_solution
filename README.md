@@ -564,3 +564,52 @@ public static boolean isAnagram(String s, String t) {
         return true;
     }
 ```
+
+### Sparsh Array
+
+<img width="588" height="594" alt="Screenshot 2026-05-22 at 12 00 04 AM" src="https://github.com/user-attachments/assets/7663d50a-2977-461e-9524-aa5e237a953f" />
+
+**Solution** - Simply use a map to keep track of the occurance of the element . Next time just refer to it for the occurance of the element on the original array.
+
+```
+public static List<Integer> matchingStrings(List<String> stringList, List<String> queries) {
+    // Write your code here
+        Map <String,Integer> map = new HashMap<>();
+        List<Integer> result = new ArrayList<>();
+        for(int i=0;i<stringList.size();i++)
+        {
+            int occurance = map.getOrDefault(stringList.get(i), 0);
+            map.put(stringList.get(i),occurance+1);
+        }
+        
+        for(int j=0;j<queries.size();j++)
+        {
+            result.add(map.getOrDefault(queries.get(j), 0));
+        }
+        
+        return result;
+    }
+```
+
+Python Code -
+
+```
+def matchingStrings(stringList, queries):
+
+    freq = {}
+    result = []
+
+    # Count occurrences
+    for s in stringList:
+
+        occurrence = freq.get(s, 0)
+
+        freq[s] = occurrence + 1
+
+    # Answer queries
+    for q in queries:
+
+        result.append(freq.get(q, 0))
+
+    return result
+```
