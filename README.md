@@ -109,6 +109,22 @@ class Solution {
 }
 ```
 
+Python -
+
+```
+class Solution:
+    def twoSum(self, nums, target):
+        mp = {}
+
+        for i in range(len(nums)):
+            diff = target - nums[i]
+
+            if diff in mp:
+                return [mp[diff], i]
+
+            mp[nums[i]] = i
+```
+
 ### Maximum Subarray ( Kadane’s Algorithm )
 
 Given an integer array nums, find the subarray with the largest sum, and return its sum.
@@ -652,3 +668,43 @@ public class Main {
     }
 }
 ```
+
+### Grading Students
+
+HackerLand University has the following grading policy:
+
+Every student receives a  grade in the inclusive range from  to .
+Any grade less than  is a failing grade.
+Sam is a professor at the university and likes to round each student's  according to these rules:
+
+If the difference between the  and the next multiple of  is less than , round  up to the next multiple of .
+If the value of grade is less than , no rounding occurs as the result will still be a failing grade.
+Examples
+
+ grade is 85 round to  (85 - 84 is less than 3)
+ grade is 37 do not round (result is less than 38)
+ grade is 60 do not round (60 - 57 is 3 or higher)
+
+**Solution** -
+
+```
+def gradingStudents(grades):
+
+    for i in range(len(grades)):
+
+        # Ignore failing grades
+        if grades[i] < 38:
+            continue
+
+        remainder = grades[i] % 5
+
+        # Difference to next multiple of 5
+        diff = 5 - remainder
+
+        if diff < 3:
+            grades[i] += diff
+
+    return grades
+```
+
+### 
