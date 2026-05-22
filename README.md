@@ -613,3 +613,42 @@ def matchingStrings(stringList, queries):
 
     return result
 ```
+
+### Sort a Array List Syntax
+
+```
+List<Integer> sorted = new ArrayList<>(arr);
+
+Collections.sort(sorted);
+```
+Python -
+
+```
+sorted_arr = sorted(arr)
+```
+
+## Clone and sort a Array
+
+```
+import java.util.Arrays;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        int[] arr = {5, 2, 8, 1, 3};
+
+        // Clone original array
+        int[] sorted = arr.clone();
+
+        // Sort cloned array
+        Arrays.sort(sorted);
+
+        System.out.println("Original Array:");
+        System.out.println(Arrays.toString(arr));
+
+        System.out.println("Sorted Cloned Array:");
+        System.out.println(Arrays.toString(sorted));
+    }
+}
+```
