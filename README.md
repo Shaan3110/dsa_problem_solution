@@ -769,3 +769,53 @@ class Solution:
 
         return max_length
 ```
+
+### Longest Palindrome Substring
+
+This problem can only be solved in O(n^2) complexity itself where you would expand for every index like for 0,0 then 0,1 so when it reaches center it keeps expanding each time.
+
+
+**Solution** -
+
+```
+class Solution {
+
+    int maxLength = 0;
+    String answer = "";
+
+    public String longestPalindrome(String s) {
+
+        if(s == null || s.length() < 2)
+            return s;
+
+        for(int i = 0; i < s.length(); i++) {
+
+            expand(s, i, i);
+
+            expand(s, i, i + 1);
+        }
+
+        return answer;
+    }
+
+    public void expand(String s, int left, int right) {
+
+        while(left >= 0 &&
+              right < s.length() &&
+              s.charAt(left) == s.charAt(right)) {
+
+            int currentLength = right - left + 1;
+
+            if(currentLength > maxLength) {
+
+                maxLength = currentLength;
+
+                answer = s.substring(left, right + 1);
+            }
+
+            left--;
+            right++;
+        }
+    }
+}
+```
