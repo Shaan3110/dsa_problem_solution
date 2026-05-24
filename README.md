@@ -707,4 +707,65 @@ def gradingStudents(grades):
     return grades
 ```
 
-### 
+### Longest Substring Without Repeating Characters
+
+
+The idea is simple using window approach we keep adding elements on our map as ele, index. Now let's say I come across a character in the string which has a occurance so directly jump to that next index and avoid it. And after each iteration of window increase just keep doing left = Math.max(maxlength, right-left+1) 
+
+**Solution** -
+
+```
+class Solution {
+
+    public int lengthOfLongestSubstring(String s) {
+
+        Map<Character, Integer> map = new HashMap<>();
+
+        int left = 0;
+        int maxLength = 0;
+
+        for(int right = 0; right < s.length(); right++) {
+
+            char ch = s.charAt(right);
+
+            if(map.containsKey(ch)) {
+
+                left = Math.max(left, map.get(ch) + 1);
+            }
+
+            map.put(ch, right);
+
+            maxLength = Math.max(maxLength, right - left + 1);
+        }
+
+        return maxLength;
+    }
+}
+```
+
+Python-
+
+```
+class Solution:
+
+    def lengthOfLongestSubstring(self, s: str) -> int:
+
+        mp = {}
+
+        left = 0
+        max_length = 0
+
+        for right in range(len(s)):
+
+            ch = s[right]
+
+            if ch in mp:
+
+                left = max(left, mp[ch] + 1)
+
+            mp[ch] = right
+
+            max_length = max(max_length, right - left + 1)
+
+        return max_length
+```
