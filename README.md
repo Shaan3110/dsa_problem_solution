@@ -917,3 +917,165 @@ class Solution:
 
         return len(min_heap)
 ```
+
+### Product of Max(A) and Min(B)
+
+You just have to find maximum element of A and minimum of B and give it's product. Just handle the negative elements properly on this problem statement.
+
+```
+class Solution {
+
+    public int productOfMaxAAndMinB(int[] A, int[] B) {
+
+        int maxA = Integer.MIN_VALUE;
+
+        int minB = Integer.MAX_VALUE;
+
+        // Find maximum in A
+        for(int num : A) {
+
+            if(num > maxA) {
+
+                maxA = num;
+            }
+        }
+
+        // Find minimum in B
+        for(int num : B) {
+
+            if(num < minB) {
+
+                minB = num;
+            }
+        }
+
+        return maxA * minB;
+    }
+}
+```
+
+Python -
+
+```
+class Solution:
+
+    def product_of_maxA_minB(self, A, B):
+
+        maxA = float('-inf')
+
+        minB = float('inf')
+
+        # Find maximum in A
+        for num in A:
+
+            if num > maxA:
+
+                maxA = num
+
+        # Find minimum in B
+        for num in B:
+
+            if num < minB:
+
+                minB = num
+
+        return maxA * minB
+```
+
+### Length of Longest Fibonacci Subsequence
+
+Given a strictly increasing array arr, the goal is to return the length of the longest subsequence satisfying arr[i] + arr[j] = arr[k] for consecutive triplets in the subsequence.
+If no such subsequence of length ≥ 3 exists, return 0.
+
+Example:
+
+Input:  arr = [1, 2, 3, 4, 5, 6, 7, 8]
+Output: 5
+Explanation: [1, 2, 3, 5, 8] is the longest Fibonacci-like subsequence.
+Input:  arr = [1, 3, 7, 11, 12, 14, 18]
+Output: 3
+Explanation: Possible subsequences: [1,11,12], [3,11,14], [7,11,18].
+
+**Solution** - Simply try to maintain a hash set first, so there are no duplicates on it. Now add every number on that hashset . While traversing now, do pick first element and second element and keep checking if the addition of them are available on the set. If so then continue with a=b and b=c and continue. Now the catch is rather than doing it in O^3 we do it on O^2 with picking all 2 elements with i=0 and j always as i+1.
+
+```
+class Solution {
+
+    public int lenLongestFibSubseq(int[] arr) {
+
+        Set<Integer> set = new HashSet<>();
+
+        for(int num : arr) {
+
+            set.add(num);
+        }
+
+        int maxLength = 0;
+
+        int n = arr.length;
+
+        for(int i = 0; i < n; i++) {
+
+            for(int j = i + 1; j < n; j++) {
+
+                int a = arr[i];
+
+                int b = arr[j];
+
+                int length = 2;
+
+                while(set.contains(a + b)) {
+
+                    int c = a + b;
+
+                    a = b;
+
+                    b = c;
+
+                    length++;
+                }
+
+                maxLength = Math.max(maxLength, length);
+            }
+        }
+
+        return maxLength >= 3 ? maxLength : 0;
+    }
+}
+```
+
+Python -
+
+```
+class Solution:
+
+    def lenLongestFibSubseq(self, arr):
+
+        nums = set(arr)
+
+        max_length = 0
+
+        n = len(arr)
+
+        for i in range(n):
+
+            for j in range(i + 1, n):
+
+                a = arr[i]
+                b = arr[j]
+
+                length = 2
+
+                while a + b in nums:
+
+                    c = a + b
+
+                    a = b
+                    b = c
+
+                    length += 1
+
+                max_length = max(max_length, length)
+
+        return max_length if max_length >= 3 else 0
+```
