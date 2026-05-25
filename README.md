@@ -819,3 +819,101 @@ class Solution {
     }
 }
 ```
+
+### Meeting Rooms II
+
+The task provides an array of meeting time intervals, each with a start and end time. The goal is to find the smallest number of meeting rooms needed so that no two meetings in the same room overlap in time. For example, given intervals 
+[[0,30],[5,10],[15,20]]
+[[0,30],[5,10],[15,20]], the answer is 2.
+
+**Solution** - To solve this in minimum time complexity we just to too worry about sorting this given array based on interval gaps ( end_time - start_time ) and `current meeting start >= earliest ending meeting` . So we will make a priority heap map store the end time of the meeting and in case of currentStart >= earliestEnd we poll and remove the top. Otherwise push the new earliestEnd as well to the queue. In this way size of our would be the number of meeting rooms. Complexity would be O(nlogn).
+
+```
+class Solution {
+
+    public int minMeetingRooms(int[][] intervals) {
+
+        if(intervals.length == 0)
+            return 0;
+
+        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+
+        minHeap.offer(intervals[0][1]);
+
+        for(int i = 1; i < intervals.length; i++) {
+
+            int currentStart = intervals[i][0];
+
+            int earliestEnd = minHeap.peek();
+
+            if(currentStart >= earliestEnd) {
+
+                minHeap.poll();
+            }
+
+            minHeap.offer(intervals[i][1]);
+        }
+
+        return minHeap.size();
+    }
+}
+```
+
+PRIORITY QUEUE SOLVES THIS
+
+Priority Queue (Min Heap):
+
+always gives smallest element first
+
+Example:
+
+Insert: `30, 10, 20`
+
+Heap internally organizes as: `10 on top`
+
+So: `minHeap.peek()`
+
+instantly gives: `10`
+
+Exactly what we need.
+
+Python -
+
+```
+import heapq
+
+class Solution:
+
+    def minMeetingRooms(self, intervals):
+
+        if not intervals:
+            return 0
+
+        # Sort by start time
+        intervals.sort(key=lambda x: x[0])
+
+        # Min heap to store ending times
+        min_heap = []
+
+        # Add first meeting end time
+        heapq.heappush(min_heap, intervals[0][1])
+
+        # Process remaining meetings
+        for i in range(1, len(intervals)):
+
+            current_start = intervals[i][0]
+
+            earliest_end = min_heap[0]
+
+            # Reuse room if meeting ended
+            if current_start >= earliest_end:
+
+                heapq.heappop(min_heap)
+
+            # Add current meeting end
+            heapq.heappush(min_heap, intervals[i][1])
+
+        return len(min_heap)
+```
